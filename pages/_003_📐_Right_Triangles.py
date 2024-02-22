@@ -1,5 +1,6 @@
 import base64
 import streamlit as st
+import latex.latex as lx
 
 # Redirect if Required
 if "quiz_state" in st.session_state and st.session_state.quiz_state == "right_triangles":
@@ -11,7 +12,7 @@ if "right_triangle_page" not in st.session_state:
     st.session_state.right_triangle_page = 0
 
 # Set Page Specific Variables
-max_page_num = 3
+max_page_num = 5
 content_dictionary = {
     0: {
         "text_1": "The term Trigonometry comes from the combination of two Greek words.  The first is trigonon, meaning three (3) angles.  This is how we get the word 'tri-angle'.  The second word is metron, meaning 'to measure'.  So, Trigonometry is all about measuring triangles.",
@@ -24,12 +25,22 @@ content_dictionary = {
         "media": "./static/IsocelesTriangle.png",
         "media_text": "Isoceles Triangle"},
     2: {
-        "text_1": "Perhaps the most important triangle, however, is the so-called 'right' triangle, shown here.  The side colored RED is what we refer to as the Hypotenuse.  Only right triangles have a side called Hypotenuse.  In this case, two sides happen to be equal, so this triangle is ALSO considered an isoceles triangle.  But that need not be the case.",
+        "text_1": "The most important type of triangle, however, is the so-called 'right' triangle, shown here.  The side colored RED is what we refer to as the Hypotenuse.  Only right triangles have a side called Hypotenuse.  In this case, two sides happen to be equal, so this triangle is ALSO considered an isoceles triangle.  But that need not be the case.  A right triangle may be an isoceles triangle if two of its angles are equal and two of its sides are equal.  If it is not an isoceles, we call it a 'scalene' triangle (i.e., a triangle where no angles are the same and no sides are the same length).",
         "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
         "media": "./static/RightTriangle.jpg",
         "media_text": "Right Triangle"},
     3: {
-        "text_1": "The reason 'right' triangles are so important is that they are the only triangles that the Pythagorean Theorem applies to. You have likely seen this theorem before ",
+        "text_1": "But why is a right triangle so special?  One reason 'right' triangles are so important is that they are the only triangles that the Pythagorean Theorem applies to. You have likely seen this theorem before: ${lx.pythagorean_theorem}$. We'll discuss this more in the next slide.",
+        "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
+        "media": "./static/PythagoreanTheorem.png",
+        "media_text": "Right Triangle"},
+    4: {
+        "text_1": "The pythagorean theorem is given by the expression ${lx.pythagorean_theorem}$. The letter 'c' always refers to the hypotenuse - the side opposite the right angle.  You can choose which sides represent 'a' or 'b'.  So, in this case, it doesn't matter whether a=4 and b=3 or a=3 and b=4.  Either way, the theorem holds and 'c', the hypotenuse, equals 5 or ${lx.square_root_25}$.",
+        "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
+        "media": "./static/PythagoreanTheorem.jpg",
+        "media_text": "Right Triangle"},
+    5: {
+        "text_1": "***Another reason 'right' triangles are so important is that they are the only triangles that the Pythagorean Theorem applies to. You have likely seen this theorem before ",
         "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
         "media": "./static/PythagoreanTheorem.jpg",
         "media_text": "Right Triangle"}
@@ -77,15 +88,21 @@ r2c1_container = second_row_col1.container(height=350, border=True)
 r2c1_container.write(text_1)
 
 r2c2_container = second_row_col2.container()
+if any(media[-4] in x for x in [".pmg", ".jpg", "jpeg", ".gif"]):
+    file_ = open(media, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+    r2c2_container.markdown(
+        f'<img src="data:image/gif;base64,{data_url}">',
+        unsafe_allow_html=True,
+    )
+elif media[-4] == ".mp4":
+    # To Come
+    print("Hello")
+else:
+    r2c2_container.write("Invalid Media Type")
 
-file_ = open(media, "rb")
-contents = file_.read()
-data_url = base64.b64encode(contents).decode("utf-8")
-file_.close()
-r2c2_container.markdown(
-    f'<img src="data:image/gif;base64,{data_url}" alt="equilateral_triangle">',
-    unsafe_allow_html=True,
-)
 with r2c2_container:
     st.write(media_text)
 
@@ -95,5 +112,5 @@ with third_row[0].container(border=True):
     st.write(text_2)
 
 # Conditional Fourth Row for Optional Quiz
-if st.session_state.right_triangle_page == 2:
+if st.session_state.right_triangle_page == max_page_num:
     fourth_row[0].button("Take Quiz", on_click=redirect_to_quiz)

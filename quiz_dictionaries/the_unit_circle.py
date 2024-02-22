@@ -58,5 +58,5 @@ content_dictionary = {
            "options": ["They equal each other.", "Sine > Cosine > Tangent", "Tangent > Cosine > Sine",
                        "They are all ratios of one side over another side of a right triangle."],
            "answer": "They are all ratios of one side over another side of a right triangle.",
-           "explanation": "You can't say anything definitive about the magnitude of sin, cos, tan, because their values depend on the angle to which they are applied."},
+           "explanation": "You can't say anything definitive about the magnitude of sin, cos, tan, because their values depend on the angle to which they are applied."}
 }
