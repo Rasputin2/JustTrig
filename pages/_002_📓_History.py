@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+import latex.latex as lx
 
 # Create the Grid
 first_row_col1, first_row_col2 = st.columns([7, 3], gap="small")
@@ -15,11 +15,16 @@ if "history_page" not in st.session_state:
     st.session_state.history_page = 0
 
 # Set Page Specific Variables
-max_page_num = 0
+max_page_num = 1
 content_dictionary = {
     0: {
-        "text_1": "Many concepts underlying the study of trigonometry are so old we don't even know who first used or invented them.  For example, the concept of pi (pronounced like :pie:) - the constant that relates the circumference of a circle to it's diameter - has been around for over 4000 years.  In fact, it may be even older than that!",
-        "text_2": "So, to try and keep things manageable, we'll start with the birth of the guy shown here - Pythagoras.  Pythagoras was born on the Greek Island of Samos in 570 BCE....  MORE TO COME",
+        "text_1": "Many concepts underlying the study of trigonometry are so old we don't even know who first used or invented them.  For example, the concept of pi (pronounced like :pie:) - the constant that relates the circumference of a circle to it's diameter - has been around for over 4000 years.  In fact, it may be even older than that!  We just don't know.",
+        "text_2": f"So, it may be easiest to start with one of the most important formulas in mathematics and work backwards from there.  In 1740 (almost 300 years ago) this guy shown here, Leonard Euler, discovered this formula: ${lx.eulers_formula}$ which we know today as Euler's formula.  Don't worry if you don't recognize or understand this.  We'll cover it all later.  One of the many cool things about this formula is that if you substitute ${lx.pi}$ for theta, the foregoing simplifies to: ${lx.eulers_identity}$, which we know as Euler's identity.  There is a lot going on here for such a short formula.  We'll start with the 'e' in the above formula. Then we'll see where the 'i' comes from.  We'll look at the history of sin and cos and finish with a discussion of ${lx.pi}$ and radians.",
+        "media": "./static/euler.jpg",
+        "media_text": "Courtesy of Wikimedia Commons"},
+    1: {
+        "text_1": "The guy shown here is Pythagoras.  Pythagoras was born on the Greek Island of Samos in 570 BCE.... ",
+        "text_2": "MORE TO COME...",
         "media": "./static/pythagoras.jpg",
         "media_text": "Courtesy of: Jacopo Bertolotti, CC0, via Wikimedia Commons"}
 }
