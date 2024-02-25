@@ -3,71 +3,36 @@ import streamlit as st
 import latex.latex as lx
 
 # Redirect if Required
-if "quiz_state" in st.session_state and st.session_state.quiz_state == "right_triangles":
+if "quiz_state" in st.session_state and st.session_state.quiz_state == "inverse_functions":
     st.switch_page("pages/_030_📝_Quiz.py")
 
 # Set Session Variables
 # Entire Script Runs Upon Page Refresh
-if "right_triangle_page" not in st.session_state:
-    st.session_state.right_triangle_page = 0
+if "inverse_functions_page" not in st.session_state:
+    st.session_state.inverse_functions_page = 0
 
 # Set Page Specific Variables
-max_page_num = 9
+max_page_num = 2
 content_dictionary = {
     0: {
-        "text_1": "The term Trigonometry comes from the combination of two Greek words.  The first is trigonon, meaning three (3) angles.  This is how we get the word 'tri-angle'.  The second word is metron, meaning 'to measure'.  So, Trigonometry is all about measuring triangles.",
-        "text_2": "We know that every triangle has to have three sides and three angles - right?  We also know those angles have to add up to 180 degrees.  But triangles come in lots of different shapes and sizes.  Some triangles with specific angles or combinations of angles have unique properties, and so we give them special names. Above you see an 'equilateral' triangle. All three of it's sides have the exact same length and each of it's angles is precisely 60 degrees.  Each of the dots you see are referred to (for every triangle, not just equilateral triangles) as a 'vertex', the plural of which is 'vertices'. Although the length of each side may change, an equilateral triangle's sides will all be of equal length and each angle must be 60 degrees.",
-        "media": "./static/EquilateralTriangle.png",
-        "media_text": "Equilateral Triangle"},
+        "text_1": "Now we're going to talk about the inverse trigonometric functions.  Remember earlier when we said that sin, cos, tan etc. are trigonometric FUNCTIONS.  Like any mathematical function, you put something into it and you get something out of it.  But this works the other way too! Check out the video on the right to how the functions relate to their inverse. :point_right:",
+        "text_2": "Some functions (not all) have an 'inverse'.  With an inverse, you can reverse the process and take the output, feed it to the inverse function, and get back the input.  Each one of the six (6) trig functions happens to have an inverse.  ",
+        "media": "./gifs/InverseFunctions.gif",
+        "media_text": "Inverse Trig Functions"},
     1: {
-        "text_1": "Another type of triangle is the 'isoceles' triangle.  One permutation of an isocoles triangle is shown on the right.",
-        "text_2": "What makes this triangle 'isoceles'?  Unlike the equilateral triangle, it only has two equal sides (the side between the red and green vertices and the side between the blue and green vertices).  We know, then, that the two angles opposite those sides are identical.  In this case, the two identical angles (the one at the red dot and the blue vertices) are 75 degrees.  That is not always the case.  The two angles could each have been 20 degrees or 30 degrees.  All we know is that if it is an isoceles, then two of the three angles must be equal.  But this is still a lot of information.  For example, given that the angles have to sum to 180 degrees (because the three angles of a triangle always sum to 180 degrees), and we know the angle at the red vertex equals 75 degrees, you can immediately figure out the other angles.  You know the angle at the blue vertex is also 75 degrees and the angle at the green vertex must be 180 - 75 - 75 = 30 degrees.",
-        "media": "./static/IsocelesTriangle.png",
-        "media_text": "Isoceles Triangle"},
+        "text_1": "So, remember that with a regular trigonometric function, we feed it the measure of an angle (like the size of Angle A or Angle B) and we get back a ratio of the lengths of certain sides of the triangle.",
+        "text_2": "What we do with inverse functions is we feed the ratio of the lengths of sides and we get back the measure of the angle.  It's just the reverse of the process.  So if the sine of 30 degrees equals 1/2, then the arcsine of 1/2 equals 30 degrees.  If the cosine of 60 degrees is 1/2 then the arccos of 1/2 is 60 degrees.  Easy, right?",
+        "media": "./static/RightTriangleWithDots.png",
+        "media_text": "Right Triangle"},
     2: {
-        "text_1": "The most important type of triangle, however, is the so-called 'right' triangle, shown here.  The side colored RED is what we refer to as the Hypotenuse.  Only right triangles have a side called Hypotenuse.  In this case, two sides happen to be equal, so this triangle is ALSO considered an isoceles triangle.  But that need not be the case.  A right triangle may be an isoceles triangle if two of its angles are equal and two of its sides are equal.  If it is not an isoceles, we call it a 'scalene' triangle (i.e., a triangle where no angles are the same and no sides are the same length).",
-        "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
+        "text_1": "Now, before we end this section, we need to focus on notation.  As noted in a previous section, math textbooks are notoriously inconsistent in their notation.  This is one place where that can cause a significant amount of confusion...",
+        "text_2": f"When you see a variable raised to the power of a negative exponent like ${lx.reciprocal_x_exponent}$ that means the same thing as 1/x.  Thus, when you see ${lx.reciprocal_sin_exponent}$ it should mean the same thing as 1/sin or cosecant.  But sometimes people will use the notation ${lx.reciprocal_sin_exponent}$ when they really mean arcsin.  The same goes for arccos and arctan etc.  In all events, when you mean arcsin or arccos etc. you should say that and not use the ${lx.reciprocal_sin_exponent}$ notation.",
         "media": "./static/RightTriangle.jpg",
-        "media_text": "Right Triangle"},
-    3: {
-        "text_1": f"But why is a right triangle so special?  One reason 'right' triangles are so important is that they are the only triangles that the Pythagorean Theorem applies to. You have likely seen this theorem before: ${lx.pythagorean_theorem}$. We'll discuss this more in the next slide.",
-        "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
-        "media": "./static/PythagoreanTheorem.png",
-        "media_text": "Right Triangle"},
-    4: {
-        "text_1": f"The pythagorean theorem is given by the expression ${lx.pythagorean_theorem}$. The letter 'c' always refers to the hypotenuse - the side opposite the right angle.  You can choose which sides represent 'a' or 'b'.  So, in this case, it doesn't matter whether a=4 and b=3 or a=3 and b=4.  Either way, the theorem holds and 'c', the hypotenuse, equals ${lx.square_root_25}$ which is 5.",
-        "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
-        "media": "./static/PythagoreanTheorem.png",
-        "media_text": "Right Triangle"},
-    5: {
-        "text_1": "Another reason 'right' triangles are so important is that the ratios of their sides represented by the trigonometric functions sine (sin), cosine (cos), and tangent (tan) will come in very handy. Look to the right triangle in the diagram.  Each vertex is associated with an angle.  A is blue.  B is green.  C is red.  We don't know what angles A and B are, but we know angle C is 90 degrees because of the red square, right?",
-        "text_2": "What is sine?  Sine is a mathematical 'function'.  Like any function, you feed it an input - what mathematicians refer to as an 'argument'.  In this case, the argument is an angle.  What do we get back?  We get back a ratio.  You remember ratios from artithmetics class.  A ratio is a numerator divided by a denominator.  In this case, the numerator is the length of the side opposite the angle.  The denominator is the length of the hypotenuse.  So, in this case, the sine of angle A is the length of the blue side divided by the length of the red side.  The sine of angle B is the length of the green side divided by the length of the red side.  What about angle C?  The sine of angle C is the opposite side divided by the hypotenuse.  It just so happens that the side opposite angle C (the right angle) is always the hypotenuse.  Thus, the sine of angle C will ALWAYS be 1.  This is important.  In this fact pattern, you don't know the length of any of the sides, so you can't compute sin(A) or sin(B), but you can still conclude that sin(C) = 1.",
-        "media": "./static/RightTriangleWithDots.png",
-        "media_text": "Sine"},
-    6: {
-        "text_1": "Let's stick with the same picture we have been using for the moment... :point_right:",
-        "text_2": "What is cosine?  Cosine is also a mathematical 'function', just like sine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side adjacent to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-        "media": "./static/RightTriangleWithDots.png",
-        "media_text": "Sine"},
-    7: {
-        "text_1": "Let's keep using this picture. :point_right: I know . . . it's getting old. :clock3:",
-        "text_2": "What is cosine?  Cosine is also a mathematical 'function', just like sine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side adjacent to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-        "media": "./static/RightTriangleWithDots.png",
-        "media_text": "Cosine"},
-    8:{
-        "text_1": "Last time we use this picture ... I promise. :point_right:",
-        "text_2": "What is tangent?  Tangent is also a mathematical 'function', just like sine and cosine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side opposite to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-        "media": "./static/RightTriangleWithDots.png",
-        "media_text": "Tan"},
-    9: {
-        "text_1": "But what about other triangles?  Not every triangle is a right triangle.",
-        "text_2": "What is tangent?  Tangent is also a mathematical 'function', just like sine and cosine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side opposite to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-        "media": "./static/RightTriangleWithDots.png",
-        "media_text": "Tan"},
+        "media_text": "Right Triangle"}
 }
 # Create the Grid
 first_row_col1, first_row_col2, first_row_col3 = st.columns([1, 8, 1], gap="small")  # Button - Header - Button
-second_row_col1, second_row_col2 = st.columns([3, 7])  # Text -- Media
+second_row_col1, second_row_col2 = st.columns([4, 6])  # Text -- Media
 third_row = st.columns(1)  # Text
 fourth_row = st.columns(1)  # Conditional Buttons
 
@@ -75,15 +40,15 @@ fourth_row = st.columns(1)  # Conditional Buttons
 # The Streamlit Session State Persists
 # Across Pages
 def set_stage(increment):
-    st.session_state.right_triangle_page = st.session_state.right_triangle_page + increment
-    if st.session_state.right_triangle_page < 0:
-        st.session_state.right_triangle_page = 0
-    if st.session_state.right_triangle_page > max_page_num:
-        st.session_state.right_triangle_page = 0
+    st.session_state.inverse_functions_page = st.session_state.inverse_functions_page + increment
+    if st.session_state.inverse_functions_page < 0:
+        st.session_state.inverse_functions_page = 0
+    if st.session_state.inverse_functions_page > max_page_num:
+        st.session_state.inverse_functions_page = 0
 
 
 def redirect_to_quiz():
-    st.session_state.quiz_state = "right_triangles"
+    st.session_state.quiz_state = "inverse_functions"
 
 
 # Render the Pages
@@ -95,14 +60,14 @@ button1 = first_row_col1.button('Prev', on_click=set_stage, args=[-1], type="pri
 
 r1c2_container = first_row_col2.container()
 with r1c2_container:
-    st.write("Page " + str(st.session_state.right_triangle_page) + " of " + str(max_page_num) + " pages.")
+    st.write("Page " + str(st.session_state.inverse_functions_page) + " of " + str(max_page_num) + " pages.")
 
 button2 = first_row_col3.button('Next', on_click=set_stage, args=[1], type="primary")
 
 # Fill in Second Row Content
-text_1 = content_dictionary[st.session_state.right_triangle_page]['text_1']
-media = content_dictionary[st.session_state.right_triangle_page]['media']
-media_text = content_dictionary[st.session_state.right_triangle_page]['media_text']
+text_1 = content_dictionary[st.session_state.inverse_functions_page]['text_1']
+media = content_dictionary[st.session_state.inverse_functions_page]['media']
+media_text = content_dictionary[st.session_state.inverse_functions_page]['media_text']
 
 r2c1_container = second_row_col1.container(height=350, border=True)
 r2c1_container.write(text_1)
@@ -127,10 +92,10 @@ with r2c2_container:
     st.write(media_text)
 
 # Fill in Third Row Content
-text_2 = content_dictionary[st.session_state.right_triangle_page]['text_2']
+text_2 = content_dictionary[st.session_state.inverse_functions_page]['text_2']
 with third_row[0].container(border=True):
     st.write(text_2)
 
 # Conditional Fourth Row for Optional Quiz
-if st.session_state.right_triangle_page == max_page_num:
+if st.session_state.inverse_functions_page == max_page_num:
     fourth_row[0].button("Take Quiz", on_click=redirect_to_quiz)

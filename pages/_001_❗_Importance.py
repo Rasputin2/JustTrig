@@ -10,19 +10,19 @@ if "importance_page" not in st.session_state:
 max_page_num = 1
 content_dictionary = {
     0: {
-        "text_1": "Trigonometry is one of the most important branches of applied mathematics.  It is unlikely anyone could list all of the ways trigonometry impacts our daily lives.  So, we will focus on one, which is probably near and dear to every teenager's heart - the cell phone. You see, electromagnetism is one of the four known forces in the universe (the others being  gravity, the strong force and the weak force).  A 2D visualization of what an electromagnetic wave looks like is to the right.",
-        "text_2": "All visibile light (like the light that emanates from the sun) is made up of electromagnetic waves, like the one shown to the right.  But there are all sorts of invisible electromagnetic waves like radio waves that are bouncing around our universe.  Cell phones wouldn't work unless humans figured out how these invisible electromagnetic waves work.  And humans wouldn't have figured out how electromagnetic waves work absent - you guessed it - trigonometry!",
-        "media": "./gifs/Frequency_doubling_with_perfect_pase_matching.gif",
-        "media_text": "Courtesy of: Jacopo Bertolotti, CC0, via Wikimedia Commons"},
+        "text_1": "Trigonometry is one of the most important branches of applied mathematics.  ",
+        "text_2": "It is unlikely anyone could list all of the ways trigonometry impacts our daily lives. So, we will focus on one, which is probably near and dear to every teenager's heart - the cell phone. You see, electromagnetism is one of the four known forces in the universe (the others being  gravity, the strong force and the weak force).  A 2D visualization of what an electromagnetic wave looks like is to the right.  All visibile light (like the light that emanates from the sun) is made up of electromagnetic waves, like the one shown to the right.  But there are all sorts of invisible electromagnetic waves like radio waves that are bouncing around our universe.  Cell phones wouldn't work unless humans figured out how these invisible electromagnetic waves work.  And humans wouldn't have figured out how electromagnetic waves work absent - you guessed it - trigonometry!",
+        "media": "./gifs/EM-Wave.gif",
+        "media_text": "CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons"},
     1: {
-        "text_1": "Trigonometry can be a little tricky.  For one thing, it requires you to learn a bunch of new terminology like sine, cosine, tangent, arcsine, cotangent, and radians, to name a few.  In addition, you have to learn about imaginary numbers, Euler's number, and the complex plane.  What may be most challenging is learning to visualize concepts in 2D and 3D.  We'll talk about all this in a bit.",
-        "text_2": "But, as we mentioned on the previous page, trigonometry is REALLY important.  So all the hard work you put in now, learning new terms and concepts, will really pay off down the road.",
-        "media": "./gifs/Sierpiński_triangle_zoom_animation.gif",
+        "text_1": "Trigonometry can be a little tricky.  For one thing, it requires you to learn a bunch of new terminology like sine, cosine, tangent, arcsine, cotangent, and radians, to name a few.  ",
+        "text_2": "In addition, you have to learn about imaginary numbers, Euler's number, and the complex plane.  What may be most challenging is learning to visualize concepts in 2D and 3D.  We'll talk about all this in a bit.  But, as we mentioned on the previous page, trigonometry is REALLY important.  So all the hard work you put in now, learning new terms and concepts, will really pay off down the road.",
+        "media": "./gifs/Sierpinski_triangle_zoom_animation.gif",
         "media_text": "Courtesy of Georg-Johann Lay, Public domain, via Wikimedia Commons"}
 }
 # Create the Grid
 first_row_col1, first_row_col2, first_row_col3 = st.columns([1, 8, 1], gap="small")  # Button - Header - Button
-second_row_col1, second_row_col2 = st.columns([6, 4], gap="small")  # Text -- Media
+second_row_col1, second_row_col2 = st.columns([2, 8], gap="small")  # Text -- Media
 third_row = st.columns(1)  # Text
 fourth_row = st.columns(1)  # Conditional Buttons
 
@@ -55,10 +55,10 @@ text_1 = content_dictionary[st.session_state.importance_page]['text_1']
 media = content_dictionary[st.session_state.importance_page]['media']
 media_text = content_dictionary[st.session_state.importance_page]['media_text']
 
-r2c1_container = second_row_col1.container(border=True)
+r2c1_container = second_row_col1.container(height=350, border=True)
 r2c1_container.write(text_1)
 
-r2c2_container = second_row_col2.container()
+r2c2_container = second_row_col2.container(height=350, border=False)
 
 file_ = open(media, "rb")
 contents = file_.read()
@@ -70,7 +70,7 @@ r2c2_container.markdown(
 )
 
 with r2c2_container:
-    st.write("Courtesy of: Jacopo Bertolotti, CC0, via Wikimedia Commons")
+    st.write(media_text)
 
 # Fill in Third Row Content
 text_2 = content_dictionary[st.session_state.importance_page]['text_2']

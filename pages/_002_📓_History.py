@@ -24,7 +24,7 @@ content_dictionary = {
         "media_text": "Courtesy of Wikimedia Commons"},
     1: {
         "text_1": "The guy shown here is Pythagoras.  Pythagoras was born on the Greek Island of Samos in 570 BCE.... ",
-        "text_2": "MORE TO COME...",
+        "text_2": "MORE TO COME... The Babylonians, the history of i, why we i, e and pi the 'transcendental' numbers and why e shows up all the time in nature ...",
         "media": "./static/pythagoras.jpg",
         "media_text": "Courtesy of: Jacopo Bertolotti, CC0, via Wikimedia Commons"}
 }

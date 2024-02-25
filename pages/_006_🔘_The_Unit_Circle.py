@@ -1,149 +1,109 @@
-import streamlit as st
 import base64
+import streamlit as st
+import latex.latex as lx
 
-st.latex(r""" e^{i\pi} + 1 = 0 """)
-st.latex(r'''
-    a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
-    \sum_{k=0}^{n-1} ar^k =
-    a \left(\frac{1-r^{n}}{1-r}\right)
-    ''')
-video_file = open('./videos/SineCurveUnitCircle.mp4', 'rb')
-video_bytes = video_file.read()
-st.video(video_bytes)
+# Redirect if Required
+if "quiz_state" in st.session_state and st.session_state.quiz_state == "the_unit_circle":
+    st.switch_page("pages/_030_📝_Quiz.py")
 
-# import base64
-# import streamlit as st
-# import latex.latex as lx
-#
-# # Redirect if Required
-# if "quiz_state" in st.session_state and st.session_state.quiz_state == "right_triangles":
-#     st.switch_page("pages/_030_📝_Quiz.py")
-#
-# # Set Session Variables
-# # Entire Script Runs Upon Page Refresh
-# if "right_triangle_page" not in st.session_state:
-#     st.session_state.right_triangle_page = 0
-#
-# # Set Page Specific Variables
-# max_page_num = 9
-# content_dictionary = {
-#     0: {
-#         "text_1": "The term Trigonometry comes from the combination of two Greek words.  The first is trigonon, meaning three (3) angles.  This is how we get the word 'tri-angle'.  The second word is metron, meaning 'to measure'.  So, Trigonometry is all about measuring triangles.",
-#         "text_2": "We know that every triangle has to have three sides and three angles - right?  We also know those angles have to add up to 180 degrees.  But triangles come in lots of different shapes and sizes.  Some triangles with specific angles or combinations of angles have unique properties, and so we give them special names. Above you see an 'equilateral' triangle. All three of it's sides have the exact same length and each of it's angles is precisely 60 degrees.  Each of the dots you see are referred to (for every triangle, not just equilateral triangles) as a 'vertex', the plural of which is 'vertices'. Although the length of each side may change, an equilateral triangle's sides will all be of equal length and each angle must be 60 degrees.",
-#         "media": "./static/EquilateralTriangle.png",
-#         "media_text": "Equilateral Triangle"},
-#     1: {
-#         "text_1": "Another type of triangle is the 'isoceles' triangle.  One permutation of an isocoles triangle is shown on the right.",
-#         "text_2": "What makes this triangle 'isoceles'?  Unlike the equilateral triangle, it only has two equal sides (the side between the red and green vertices and the side between the blue and green vertices).  We know, then, that the two angles opposite those sides are identical.  In this case, the two identical angles (the one at the red dot and the blue vertices) are 75 degrees.  That is not always the case.  The two angles could each have been 20 degrees or 30 degrees.  All we know is that if it is an isoceles, then two of the three angles must be equal.  But this is still a lot of information.  For example, given that the angles have to sum to 180 degrees (because the three angles of a triangle always sum to 180 degrees), and we know the angle at the red vertex equals 75 degrees, you can immediately figure out the other angles.  You know the angle at the blue vertex is also 75 degrees and the angle at the green vertex must be 180 - 75 - 75 = 30 degrees.",
-#         "media": "./static/IsocelesTriangle.png",
-#         "media_text": "Isoceles Triangle"},
-#     2: {
-#         "text_1": "The most important type of triangle, however, is the so-called 'right' triangle, shown here.  The side colored RED is what we refer to as the Hypotenuse.  Only right triangles have a side called Hypotenuse.  In this case, two sides happen to be equal, so this triangle is ALSO considered an isoceles triangle.  But that need not be the case.  A right triangle may be an isoceles triangle if two of its angles are equal and two of its sides are equal.  If it is not an isoceles, we call it a 'scalene' triangle (i.e., a triangle where no angles are the same and no sides are the same length).",
-#         "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
-#         "media": "./static/RightTriangle.jpg",
-#         "media_text": "Right Triangle"},
-#     3: {
-#         "text_1": f"But why is a right triangle so special?  One reason 'right' triangles are so important is that they are the only triangles that the Pythagorean Theorem applies to. You have likely seen this theorem before: ${lx.pythagorean_theorem}$. We'll discuss this more in the next slide.",
-#         "text_2": "What makes a triangle a 'right' triangle?  The existence of a 'right' angle - meaning an angle with 90 degrees.  Whenever you see a square :square: superimposed on a vertex like the red square shown here, you know you have a 'right' angle - an angle at 90 degrees :angle:.  It's opposite side is always the hypotenuse.",
-#         "media": "./static/PythagoreanTheorem.png",
-#         "media_text": "Right Triangle"},
-#     4: {
-#         "text_1": "Check out the video to the right :point_right:.  What you see is a visualization of a point going around the unit circle while, simultaneously, another dot follows  ",
-#         "text_2": "",
-#         "media": "./videos/sine_curve_with_unit_circle.mp4",
-#         "media_text": "Unit Circle + Sine Wave"},
-#     5: {
-#         "text_1": "Another reason 'right' triangles are so important is that the ratios of their sides represented by the trigonometric functions sine (sin), cosine (cos), and tangent (tan) will come in very handy. Look to the right triangle in the diagram.  Each vertex is associated with an angle.  A is blue.  B is green.  C is red.  We don't know what angles A and B are, but we know angle C is 90 degrees because of the red square, right?",
-#         "text_2": "What is sine?  Sine is a mathematical 'function'.  Like any function, you feed it an input - what mathematicians refer to as an 'argument'.  In this case, the argument is an angle.  What do we get back?  We get back a ratio.  You remember ratios from artithmetics class.  A ratio is a numerator divided by a denominator.  In this case, the numerator is the length of the side opposite the angle.  The denominator is the length of the hypotenuse.  So, in this case, the sine of angle A is the length of the blue side divided by the length of the red side.  The sine of angle B is the length of the green side divided by the length of the red side.  What about angle C?  The sine of angle C is the opposite side divided by the hypotenuse.  It just so happens that the side opposite angle C (the right angle) is always the hypotenuse.  Thus, the sine of angle C will ALWAYS be 1.  This is important.  In this fact pattern, you don't know the length of any of the sides, so you can't compute sin(A) or sin(B), but you can still conclude that sin(C) = 1.",
-#         "media": "./static/RightTriangleWithDots.png",
-#         "media_text": "Sine"},
-#     6: {
-#         "text_1": "Let's stick with the same picture we have been using for the moment... :point_right:",
-#         "text_2": "What is cosine?  Cosine is also a mathematical 'function', just like sine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side adjacent to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-#         "media": "./static/RightTriangleWithDots.png",
-#         "media_text": "Sine"},
-#     7: {
-#         "text_1": "Let's keep using this picture. :point_right: I know . . . it's getting old. :clock3:",
-#         "text_2": "What is cosine?  Cosine is also a mathematical 'function', just like sine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side adjacent to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-#         "media": "./static/RightTriangleWithDots.png",
-#         "media_text": "Cosine"},
-#     8:{
-#         "text_1": "Last time we use this picture ... I promise. :point_right:",
-#         "text_2": "What is tangent?  Tangent is also a mathematical 'function', just like sine and cosine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side opposite to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-#         "media": "./static/RightTriangleWithDots.png",
-#         "media_text": "Tan"},
-#     9: {
-#         "text_1": "But what about other triangles?  Not every triangle is a right triangle.",
-#         "text_2": "What is tangent?  Tangent is also a mathematical 'function', just like sine and cosine.  But this time, when we feed in an angle, the numerator of the ratio is the length of the side opposite to the angle.  The denominator is still the length of the hypotenuse.  So, in this case, the cosine of angle A is the length of the green side divided by the length of the red side.  The cosine of angle B is the length of the blue side divided by the length of the red side.  What about angle C?  We know angle C has an opposite side, but does it have an adjacent side?  No.  It doesn't.  So the length of it's adjacent side is '0'.  Thus, the cosine of angle C will ALWAYS be 0.  Again, you don't know the length of any of the sides in this example, but you can still conclude that cos(C) = 0.",
-#         "media": "./static/RightTriangleWithDots.png",
-#         "media_text": "Tan"},
-# }
-# # Create the Grid
-# first_row_col1, first_row_col2, first_row_col3 = st.columns([1, 8, 1], gap="small")  # Button - Header - Button
-# second_row_col1, second_row_col2 = st.columns([3, 7])  # Text -- Media
-# third_row = st.columns(1)  # Text
-# fourth_row = st.columns(1)  # Conditional Buttons
-#
-#
-# # The Streamlit Session State Persists
-# # Across Pages
-# def set_stage(increment):
-#     st.session_state.right_triangle_page = st.session_state.right_triangle_page + increment
-#     if st.session_state.right_triangle_page < 0:
-#         st.session_state.right_triangle_page = 0
-#     if st.session_state.right_triangle_page > max_page_num:
-#         st.session_state.right_triangle_page = 0
-#
-#
-# def redirect_to_quiz():
-#     st.session_state.quiz_state = "right_triangles"
-#
-#
-# # Render the Pages
-# # The Content Changes Based on the Session_State Which
-# # Acts as the Key for the Content Dictionary
-#
-# # Fill in First Row Content
-# button1 = first_row_col1.button('Prev', on_click=set_stage, args=[-1], type="primary")
-#
-# r1c2_container = first_row_col2.container()
-# with r1c2_container:
-#     st.write("Page " + str(st.session_state.right_triangle_page) + " of " + str(max_page_num) + " pages.")
-#
-# button2 = first_row_col3.button('Next', on_click=set_stage, args=[1], type="primary")
-#
-# # Fill in Second Row Content
-# text_1 = content_dictionary[st.session_state.right_triangle_page]['text_1']
-# media = content_dictionary[st.session_state.right_triangle_page]['media']
-# media_text = content_dictionary[st.session_state.right_triangle_page]['media_text']
-#
-# r2c1_container = second_row_col1.container(height=350, border=True)
-# r2c1_container.write(text_1)
-#
-# r2c2_container = second_row_col2.container()
-# if any(media[-4] in x for x in [".pmg", ".jpg", "jpeg", ".gif"]):
-#     file_ = open(media, "rb")
-#     contents = file_.read()
-#     data_url = base64.b64encode(contents).decode("utf-8")
-#     file_.close()
-#     r2c2_container.markdown(
-#         f'<img src="data:image/gif;base64,{data_url}">',
-#         unsafe_allow_html=True,
-#     )
-# elif media[-4] == ".mp4":
-#     # To Come
-#     print("Hello")
-# else:
-#     r2c2_container.write("Invalid Media Type")
-#
-# with r2c2_container:
-#     st.write(media_text)
-#
-# # Fill in Third Row Content
-# text_2 = content_dictionary[st.session_state.right_triangle_page]['text_2']
-# with third_row[0].container(border=True):
-#     st.write(text_2)
-#
-# # Conditional Fourth Row for Optional Quiz
-# if st.session_state.right_triangle_page == max_page_num:
-#     fourth_row[0].button("Take Quiz", on_click=redirect_to_quiz)
+# Set Session Variables
+# Entire Script Runs Upon Page Refresh
+if "the_unit_circle_page" not in st.session_state:
+    st.session_state.the_unit_circle_page = 0
+
+# Set Page Specific Variables
+max_page_num = 4
+content_dictionary = {
+    0: {
+        "text_1": "",
+        "text_2": "OK... Now we're ready to start talking about something called the 'unit circle'.  The unit circle is just an ordinary circle, but it is centered at the origin (0,0) and has a radius of one.  One what?  It doesn't matter.  It could be one meter, one mile, one kilometer.  The point is that whatever units of measurement you happen to be using, the radius is one of those units.  Now, you may be wondering, what does trigonometry have to do with circles?  I thought you said trigonometry was all about triangles!  That's true.  Trigonometry is all about triangles.  But, you can reach any point on the unit circle (see the red dot) with right triangles.  Go to the next slide to see how.",
+        "media": "./gifs/UnitCircleWithDot.gif",
+        "media_text": "The Unit Circle"},
+    1: {
+        "text_1": "",
+        "text_2": "What this animation shows is how you can reach any point on the unit circle with a right triangle.  In any of the four quadrants of the unit circle, by carefully drawing a right triangle, we can ensure that one of the vertices touches the circle.  Why is this important?  It is important, because it means that we can use that knowledge of trig functions to identify any given point on the circle.  Why do we care?  Remember in the Importance section we discussed the concept of waves.  We'll tie this all together in a moment, but there are a couple more things we need to cover first.  Be patient....",
+        "media": "./gifs/UnitCircleWithTriangle.gif",
+        "media_text": "Right Triangle in Unit Circle"},
+    2: {
+        "text_1": "",
+        "text_2": "Things can get a little weird at the axes.... What you need to do is imagine that at (1,0) you have a right triangle with no height.  In this case, the sin will be zero and the cos will be 1, because the length of the adjacent side will be 1 and the hypotenuse will also be 1. At (0,1) you have to imagine a right triangle with no width, and so the opposite side has length 1 and the hypotenuse has length 1, and so the sin is 1 and the cosine is 0.  Take some time and think about that before you proceed :thinking_face:.  What is really important to keep in mind here is that you can use the unit circle to determine what the sine or cosine is of ANY angle.  This is because whatever angle you choose, all you need to do is find the x and y coordinates of the point where a carefully drawn right triangle intersects with the circle.  The y coordinate will give you sine and the x coordinate will give you cosine.  Let's check out an example....",
+        "media": "./static/UnitCircleAtAxes.jpg",
+        "media_text": "Unit Circle on Axes"},
+    3: {
+        "text_1": "",
+        "text_2": f"Let's assume someone were to ask you for the cosine of 135 degrees.  How could you use what you have learned thus far to find that answer?  Well, theta_1, shown above, is what we are trying to find.  Obviously, since the angle is larger than 90 degrees we can't make a right triangle out of that.  But what if we were to drop a new line (the red line) down perpendicular to the x-axis as shown above.  Now, we have theta_2.  What is theta_2?  We know that an entire circle is 360 degrees right?  So, half a circle is 180 degrees.  If we subtract 135 from 180, we get 45, which is theta_2.  Now, we have a right triangle in the second quadrant defined by the white rotated line, the x-axis and the red perpendicular line.  We know the right angle is 90 degrees and theta_2 is 45 degrees.  Thus, given triangles have to have only 180 degrees, we know the other angle is also 45 degrees.  What else do we know?  Well, this is the unit circle right?  So, the hypotenuse has to be '1' units long, because the radius of the unit circle is '1' and the hypotenuse here has to equal the radius of the circle. We also know that the height and width of the triangle have to be identical because the non-right angles are identical.  We also know from the pythagorean theorem ${lx.pythagorean_theorem}$ that c in this case is 1, and a and b are identical so we can rewrite the right-side of the equation as 2a^2.  So now we just do some algebra.  This simplifies to a = the square root of 1/2 which is plus or minus ${lx.square_root_2_over_2}$.  We say plus or minues because it's possible a was negative and when we squared it, the negative sign went away (i.e., a negative times a negative yields a positive).  So, believe it or not, we now have our answer.  You see, the cosine of the angle drawn from 0 to 135 degrees is the same as the cosine of 45 degrees in the third quadrant.  We know that the cosine equals the x coordinate of a carefully drawn right triangle.  What is our x-coordinate here?  It is -${lx.square_root_2_over_2}$.  Voila! :popcorn:",
+        "media": "./gifs/UnitCircle135.gif",
+        "media_text": "Unit Circle on Axes"},
+    4: {
+        "text_1": "",
+        "text_2": "More to come... radians, and waves!",
+        "media": "./static/UnitCircleRadians.jpg",
+        "media_text": "Unit Circle on Axes"}
+}
+# Create the Grid
+first_row_col1, first_row_col2, first_row_col3 = st.columns([1, 8, 1], gap="small")  # Button - Header - Button
+second_row = st.columns(1)  # Text -- Media
+third_row = st.columns(1)  # Text
+fourth_row = st.columns(1)  # Conditional Buttons
+
+
+# The Streamlit Session State Persists
+# Across Pages
+def set_stage(increment):
+    st.session_state.the_unit_circle_page = st.session_state.the_unit_circle_page + increment
+    if st.session_state.the_unit_circle_page < 0:
+        st.session_state.the_unit_circle_page = 0
+    if st.session_state.the_unit_circle_page > max_page_num:
+        st.session_state.the_unit_circle_page = 0
+
+
+def redirect_to_quiz():
+    st.session_state.quiz_state = "the_unit_circle"
+
+
+# Render the Pages
+# The Content Changes Based on the Session_State Which
+# Acts as the Key for the Content Dictionary
+
+# Fill in First Row Content
+button1 = first_row_col1.button('Prev', on_click=set_stage, args=[-1], type="primary")
+
+r1c2_container = first_row_col2.container()
+with r1c2_container:
+    st.write("Page " + str(st.session_state.the_unit_circle_page) + " of " + str(max_page_num) + " pages.")
+
+button2 = first_row_col3.button('Next', on_click=set_stage, args=[1], type="primary")
+
+# Fill in Second Row Content
+text_1 = content_dictionary[st.session_state.the_unit_circle_page]['text_1']
+media = content_dictionary[st.session_state.the_unit_circle_page]['media']
+media_text = content_dictionary[st.session_state.the_unit_circle_page]['media_text']
+
+r2c2_container = second_row[0].container()
+if any(media[-4] in x for x in [".pmg", ".jpg", "jpeg", ".gif"]):
+    file_ = open(media, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+    r2c2_container.markdown(
+        f'<img src="data:image/gif;base64,{data_url}">',
+        unsafe_allow_html=True,
+    )
+elif media[-4] == ".mp4":
+    video_file = open(media, 'rb')
+    video_bytes = video_file.read()
+    st.video(video_bytes)
+else:
+    r2c2_container.write("Invalid Media Type")
+
+with r2c2_container:
+    st.write(media_text)
+
+# Fill in Third Row Content
+text_2 = content_dictionary[st.session_state.the_unit_circle_page]['text_2']
+with third_row[0].container(border=True):
+    st.write(text_2)
+
+# Conditional Fourth Row for Optional Quiz
+if st.session_state.the_unit_circle_page == max_page_num:
+    fourth_row[0].button("Take Quiz", on_click=redirect_to_quiz)

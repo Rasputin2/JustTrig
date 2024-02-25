@@ -1,5 +1,7 @@
 import streamlit as st
 import quiz_dictionaries.right_triangles
+import quiz_dictionaries.inverse_functions
+import quiz_dictionaries.six_trig_functions
 import quiz_dictionaries.the_unit_circle
 
 st.set_page_config("wide")
@@ -9,6 +11,10 @@ content_dictionary = {}
 if "quiz_state" in st.session_state:
     if st.session_state.quiz_state == "right_triangles":
         content_dictionary = quiz_dictionaries.right_triangles.content_dictionary
+    elif st.session_state.quiz_state == "six_trig_functions":
+        content_dictionary = quiz_dictionaries.six_trig_functions.content_dictionary
+    elif st.session_state.quiz_state == "inverse_functions":
+        content_dictionary = quiz_dictionaries.inverse_functions.content_dictionary
     elif st.session_state.quiz_state == "the_unit_circle":
         content_dictionary = quiz_dictionaries.the_unit_circle.content_dictionary
     else:
