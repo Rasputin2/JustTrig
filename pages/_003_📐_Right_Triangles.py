@@ -12,7 +12,7 @@ if "right_triangle_page" not in st.session_state:
     st.session_state.right_triangle_page = 0
 
 # Set Page Specific Variables
-max_page_num = 9
+max_page_num = 10
 content_dictionary = {
     0: {
         "text_1": "The term Trigonometry comes from the combination of two Greek words.  The first is trigonon, meaning three (3) angles.  This is how we get the word 'tri-angle'.  The second word is metron, meaning 'to measure'.  So, Trigonometry is all about measuring triangles.",
@@ -62,13 +62,18 @@ content_dictionary = {
         "text_2": "Each side is of length 6.  By definition, each angle at each vertex must be 60 degrees.  However, if we imagine a line were dropped (sometimes referred to as dropping a perpendicular) from the top vertex down to the base, like the red dashed line shown here, we bisect the equilateral triangle into 2 right-triangles.  What can we infer from this?  Well, we know that since the red line bisects the base in two, the length of each side to the left and right of the red dashed line is of length 3.  What else do we know?  We know that the angle between the red line and the base is 90 degrees (illustrated by the square).  We also know that the uppermost angle must be half of 60 degrees or 30 degrees.  So, we have two right triangles now and with angles 30-60-90 where one side has a length of 3 and the hypotenuse has a length of 6.  Pretty cool heh?",
         "media": "./static/FindTheRightTriangle.png",
         "media_text": "Finding the Right Triangle"},
+    10: {
+        "text_1": "The last thing we need to cover in this section is that there are a couple of right triangles that will show up again and again and again on your tests.  The reason is that they happen to have sides which are relatively easy to calculate and manipulate without calculators.  So teachers often like to use them on exams.",
+        "text_2": "The three triangles you are most likely to see are the 30, 60, 90 right triangle, the 45, 45, 90 isoceles right triangle, and the 3, 4, 5 right triangle shown above :point_up:.  These are so common that you may want to commit their angles and sides to memory.",
+        "media": "./static/CommonTriangles.png",
+        "media_text": "Finding the Right Triangle"},
 }
+
 # Create the Grid
 first_row_col1, first_row_col2, first_row_col3 = st.columns([1, 8, 1], gap="small")  # Button - Header - Button
 second_row_col1, second_row_col2 = st.columns([3, 7])  # Text -- Media
 third_row = st.columns(1)  # Text
 fourth_row = st.columns(1)  # Conditional Buttons
-
 
 # The Streamlit Session State Persists
 # Across Pages

@@ -17,6 +17,10 @@ if "quiz_state" in st.session_state:
         content_dictionary = quiz_dictionaries.inverse_functions.content_dictionary
     elif st.session_state.quiz_state == "the_unit_circle":
         content_dictionary = quiz_dictionaries.the_unit_circle.content_dictionary
+    elif st.session_state.quiz_state == "the_sin_wave":
+        content_dictionary = quiz_dictionaries.the_sin_wave.content_dictionary
+    elif st.session_state.quiz_state == "the_cos_wave":
+        content_dictionary = quiz_dictionaries.the_cos_wave.content_dictionary
     else:
         st.switch_page("Home.py")
 else:
