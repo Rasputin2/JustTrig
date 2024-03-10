@@ -3,6 +3,11 @@ import quiz_dictionaries.right_triangles
 import quiz_dictionaries.inverse_functions
 import quiz_dictionaries.six_trig_functions
 import quiz_dictionaries.the_unit_circle
+import quiz_dictionaries.the_sin_wave
+import quiz_dictionaries.the_cos_wave
+import quiz_dictionaries.the_tan_wave
+import quiz_dictionaries.more_waves
+import quiz_dictionaries.trig_identities_pt1
 
 st.set_page_config("wide")
 
@@ -21,6 +26,12 @@ if "quiz_state" in st.session_state:
         content_dictionary = quiz_dictionaries.the_sin_wave.content_dictionary
     elif st.session_state.quiz_state == "the_cos_wave":
         content_dictionary = quiz_dictionaries.the_cos_wave.content_dictionary
+    elif st.session_state.quiz_state == "the_tan_wave":
+        content_dictionary = quiz_dictionaries.the_tan_wave.content_dictionary
+    elif st.session_state.quiz_state == "more_waves":
+        content_dictionary = quiz_dictionaries.more_waves.content_dictionary
+    elif st.session_state.quiz_state == "trig_identities_pt1":
+        content_dictionary = quiz_dictionaries.trig_identities_pt1.content_dictionary
     else:
         st.switch_page("Home.py")
 else:
