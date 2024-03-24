@@ -12,7 +12,7 @@ if "the_cos_wave_page" not in st.session_state:
     st.session_state.the_cos_wave_page = 0
 
 # Set Page Specific Variables
-max_page_num = 2
+max_page_num = 3
 content_dictionary = {
     0: {
         "text_1": "",
@@ -31,9 +31,9 @@ content_dictionary = {
         "media_text": "Sine & Cosine Function Plot"},
     3: {
         "text_1": "",
-        "text_2": "",
-        "media": "./gifs/SinIsAFunction.gif",
-        "media_text": "Sine Is a Function"},
+        "text_2": "Some of you may be struggling a bit with why the cosine wave doesn't exactly match the graph of the Unit Circle, at least in the first quadrant. If this is intuitive to you, skip ahead.  If not, check out my video to see if it helps explain the differences.",
+        "media": "./gifs/UnitCircle_Cosine.gif",
+        "media_text": "Cosine Wave vs. Unit Circle"},
     4: {
         "text_1": "",
         "text_2": f"",

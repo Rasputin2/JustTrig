@@ -12,7 +12,7 @@ if "the_tan_wave_page" not in st.session_state:
     st.session_state.the_tan_wave_page = 0
 
 # Set Page Specific Variables
-max_page_num = 2
+max_page_num = 3
 content_dictionary = {
     0: {
         "text_1": "",
@@ -31,9 +31,9 @@ content_dictionary = {
         "media_text": "Tangent = Sine / Cosine"},
     3: {
         "text_1": "",
-        "text_2": f"",
-        "media": "./gifs/UnitCircleWithPi.gif",
-        "media_text": "Unit Circle With Pi"},
+        "text_2": f"Now if you were paying attention in your algebra or geometry classes (which you likely took before your trig class), you may have encountered this concept of a *'tangent'* line. In Latin, the word *tangere* means 'to touch', and a tangent line 'touches' a circle or an arc at a single point. In the above diagram there are two tangent lines. One is in red and is perpendicular to the hypotenuse. The other is in blue and is perpendicular to the x-axis. Now, if you were to extend the hypotenuse in the direction of the arrow until it intersects with the blue tangent line, you would have another circle.  What would the ratio of the height of that triangle to the base?  Well, we know the base would have to be '1', because this is the unit circle and so really it's the height of the line that: (i) is tangent to the unit circle, (ii) is perpendicular to the x-axis; and (iii) would intersect with the hypotenuse if the hypotenuse extended in the direction of the arrow. If you check, you'll see that this height is exactly equal to tan(${lx.theta}$).",
+        "media": "./gifs/TanToTanFunction.gif",
+        "media_text": "Tangent Line vs. Tangent Function"},
     4:  {
         "text_1": "",
         "text_2": f"",

@@ -32,6 +32,10 @@ if "quiz_state" in st.session_state:
         content_dictionary = quiz_dictionaries.more_waves.content_dictionary
     elif st.session_state.quiz_state == "trig_identities_pt1":
         content_dictionary = quiz_dictionaries.trig_identities_pt1.content_dictionary
+    elif st.session_state.quiz_state == "eulers_number":
+        content_dictionary = quiz_dictionaries.eulers_number.content_dictionary
+    elif st.session_state.quiz_state == "eulers_formula":
+        content_dictionary = quiz_dictionaries.eulers_formula.content_dictionary
     else:
         st.switch_page("Home.py")
 else:

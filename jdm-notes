@@ -1,0 +1,8 @@
+# To run the app you need to:
+- Start Docker
+- Start Redis Database
+- docker build -t dockerfile .
+- run main
+
+
+I am hopeful you will consider my 4752 word short story about three desperate colonists on a distant planet who must travel to parley with a tribe of hominids called the Reapers. Along the way, the man begins to suspect the woman will trade the child to the Reapers for raw materials. He has to choose whether to participate in an immoral act or help the colony survive. At the very end, the man realizes the situation is not what it seems. 
